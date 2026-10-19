@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>KOTO LENS | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0b; --panel:#141414; --line:#262626;
+    --text:#ececec; --muted:#9a9a9a; --accent:#c9b18a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:"Noto Sans JP",sans-serif;font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  header{padding:28px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  header img{width:28px;height:28px;object-fit:contain}
+  header span{font-family:"Cormorant Garamond",serif;letter-spacing:.25em;font-size:15px}
+  .hero{max-width:1100px;margin:0 auto;padding:72px 24px 40px}
+  .eyebrow{font-family:"Cormorant Garamond",serif;color:var(--accent);letter-spacing:.35em;font-size:13px}
+  h1{font-size:clamp(26px,4vw,36px);font-weight:400;letter-spacing:.08em;margin-top:10px}
+  .note{color:var(--muted);font-size:13px;margin-top:14px}
+  .filters{max-width:1100px;margin:0 auto;padding:0 24px 28px;display:flex;flex-wrap:wrap;gap:8px}
+  .filters button{background:none;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:12px;padding:6px 16px;border-radius:999px;cursor:pointer;letter-spacing:.08em}
+  .filters button.on{border-color:var(--accent);color:var(--accent)}
+  .grid{max-width:1100px;margin:0 auto;padding:0 24px 96px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:28px}
+  .card{background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+  .thumb{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;display:block}
+  .thumb img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s,transform .6s}
+  .thumb:hover img{opacity:1;transform:scale(1.03)}
+  /* 縦動画：横と同じ16:9枠に、ぼかし背景＋中央に縦長サムネイル */
+  .thumb.vertical .bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);filter:blur(18px) brightness(.45);opacity:1;transform:none}
+  .thumb.vertical .fg{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);aspect-ratio:9/16;height:100%;overflow:hidden;box-shadow:0 0 24px rgba(0,0,0,.6)}
+  .thumb.vertical:hover .bg{transform:none}
+  .format{display:inline-block;font-size:10px;color:var(--muted);margin-left:6px;letter-spacing:.1em}
+  .thumb::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:22px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .tag{font-size:11px;color:var(--accent);letter-spacing:.15em}
+  h2{font-size:17px;font-weight:500;letter-spacing:.04em;line-height:1.6}
+  .desc{font-size:13px;color:#cfcfcf}
+  .meta{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+  .ph{display:inline-block}
+  footer{text-align:center;color:var(--muted);font-size:11px;padding:32px 24px 48px;border-top:1px solid var(--line);letter-spacing:.1em}
+  @media (max-width:420px){.hero{padding:48px 16px 28px}.filters,.grid{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+<header>
+  <img src="logo_mark.png" alt="">
+  <span>KOTO LENS</span>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">PORTFOLIO</p>
+  <h1>制作実績</h1>
+  <p class="note">本ページは、リンクをお知らせした方のみご覧いただけます。URL・映像の外部共有はご遠慮ください。</p>
+</section>
+
+<nav class="filters" id="filters"></nav>
+<main class="grid" id="grid"></main>
+
+<footer>© KOTO LENS</footer>
+
+<script>
+/* ===== 実績はここに追加 =====
+  youtube : YouTubeの動画ID
+  vertical: ショート動画なら true
+  title / desc : 「/」は折り返してよい位置、「\n」は改行（言葉の途中で割れないようにするための目印）
+*/
+const WORKS = [
+  { category:"ヘアサロン", title:"ヘアサロンPV/　やまの美容室 様", youtube:"v7etnt9Hzz8", vertical:true,
+    desc:"大分駅近くにある、/隠れ家的な/ヘアサロン。\nオーナー様の人柄と、/チラッと見える/店内の雰囲気が/伝わるように/制作しました。",
+    meta:"企画・撮影・編集" },
+  { category:"店舗PV", title:"県内最大規模古着屋/　EtWo 様", youtube:"CoMD-v89uEc",
+    desc:"大分県内最大規模の/ヴィンテージショップグループ、\nEtWo様の/店舗紹介動画を/制作。\n商品量や/スタッフの個性が/伝わる構成で、/来店の/きっかけに/なるよう/意識しました。",
+    meta:"企画・撮影・編集" },
+  { category:"YouTube", title:"車紹介/　YouTube動画", youtube:"vgmmsFDbh6s",
+    desc:"視聴者が見飽きないよう、/テンポ感を/意識して/編集。",
+    meta:"編集 ／ 14分31秒" },
+  { category:"YouTube", title:"YouTube動画", youtube:"WeChiU2r63Q",
+    desc:"",
+    meta:"11分37秒" },
+];
+
+const grid = document.getElementById("grid");
+const filters = document.getElementById("filters");
+const cats = ["すべて", ...new Set(WORKS.map(w => w.category))];
+let current = "すべて";
+
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ph = s => s.split("\n").map(line => line.split("/").map(p => `<span class="ph">${esc(p)}</span>`).join("")).join("<br>");
+
+function render(){
+  grid.innerHTML = WORKS.filter(w => current==="すべて" || w.category===current).map(w => {
+    const url = "https://youtu.be/" + w.youtube;
+    const src = `https://img.youtube.com/vi/${w.youtube}/hqdefault.jpg`;
+    const img = w.vertical
+      ? `<img class="bg" src="${src}" alt="" loading="lazy"><span class="fg"><img src="${src}" alt="" loading="lazy"></span>`
+      : `<img src="${src}" alt="" loading="lazy">`;
+    const label = esc(w.title.replace(/\//g, "")) + "（YouTubeで開く）";
+    return `<article class="card">
+      <a class="thumb${w.vertical ? " vertical" : ""}" href="${url}" target="_blank" rel="noopener" aria-label="${label}">${img}</a>
+      <div class="body">
+        <p class="tag">${esc(w.category)}${w.vertical ? '<span class="format">縦型</span>' : ""}</p>
+        <h2>${ph(w.title)}</h2>
+        ${w.desc ? `<p class="desc">${ph(w.desc)}</p>` : ""}
+        ${w.meta ? `<p class="meta">${esc(w.meta)}</p>` : ""}
+      </div>
+    </article>`;
+  }).join("");
+}
+filters.innerHTML = cats.map(c => `<button class="${c===current?"on":""}" data-c="${c}">${c}</button>`).join("");
+filters.addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  current = b.dataset.c;
+  filters.querySelectorAll("button").forEach(x => x.classList.toggle("on", x===b));
+  render();
+});
+render();
+</script>
+</body>
+</html>
